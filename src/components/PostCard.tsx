@@ -16,7 +16,7 @@ import { Textarea } from "./ui/textarea";
 type Posts = Awaited<ReturnType<typeof getPosts>>;
 type Post = Posts[number];
 
-function PostCard({ post, dbUserId,currentUserId}: { post: Post; dbUserId: string | null; currentUserId: string | undefined}) {
+function PostCard({ post, dbUserId}: { post: Post; dbUserId: string | null}) {
   const { user } = useUser();
   const [newComment, setNewComment] = useState("");
   const [isCommenting, setIsCommenting] = useState(false);
@@ -99,12 +99,12 @@ function PostCard({ post, dbUserId,currentUserId}: { post: Post; dbUserId: strin
                   </div>
                 </div>
                 {/* Check if current user is the post author */}
-                {/* {dbUserId === post.author.id && (
-                  <DeleteAlertDialog isDeleting={isDeleting} onDelete={handleDeletePost} />
-                )} */}
-                {currentUserId === post.author.id && (
+                {dbUserId === post.author.id && (
                   <DeleteAlertDialog isDeleting={isDeleting} onDelete={handleDeletePost} />
                 )}
+                {/* {currentUserId === post.author.id && (
+                  <DeleteAlertDialog isDeleting={isDeleting} onDelete={handleDeletePost} />
+                )} */}
               </div>
               <p className="mt-2 text-sm text-foreground break-words">{post.content}</p>
             </div>
